@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Chef {
     public static void main(String[] args) {
         String logo =
-                " _____   _               ____   \n"
+                        " _____   _               ____   \n"
                         + "|  ___| | |      ____   /  _ \\ \n"
                         + "| |     | |___, / __ \\ |  /\\_/  \n"
                         + "| |___  | ,_, | |  __/ | |---  \n"
@@ -14,8 +14,7 @@ public class Chef {
         System.out.println("____________________________________________________________");
         Scanner scanner = new Scanner(System.in);
 
-        String[] tasks = new String[100];
-        boolean[] isDone = new boolean[100];
+        Task[] tasks = new Task[100];
         int count = 0;
 
         while (true) {
@@ -33,8 +32,7 @@ public class Chef {
                     System.out.println(" No tasks yet!");
                 } else {
                     for (int i = 0; i < count; i++) {
-                        String status = isDone[i] ? "[X]" : "[ ]";
-                        System.out.println(" " + (i + 1) + "." + status + " git t" + tasks[i]);
+                        System.out.println(" " + (i + 1) + "." + tasks[i]);
                     }
                 }
                 System.out.println("____________________________________________________________");
@@ -42,10 +40,10 @@ public class Chef {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     if (index >= 0 && index < count) {
-                        isDone[index] = true;
+                        tasks[index].markDone();
                         System.out.println("____________________________________________________________");
                         System.out.println(" Nice! I've marked this task as done:");
-                        System.out.println("   [X] " + tasks[index]);
+                        System.out.println("   " + tasks[index]);
                         System.out.println("____________________________________________________________");
                     } else {
                         System.out.println("____________________________________________________________");
@@ -62,10 +60,10 @@ public class Chef {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     if (index >= 0 && index < count) {
-                        isDone[index] = false;
+                        tasks[index].markUndone();
                         System.out.println("____________________________________________________________");
                         System.out.println(" OK, I've marked this task as not done yet:");
-                        System.out.println("   [ ] " + tasks[index]);
+                        System.out.println("   " + tasks[index]);
                         System.out.println("____________________________________________________________");
                     } else {
                         System.out.println("____________________________________________________________");
@@ -79,19 +77,66 @@ public class Chef {
                 }
             }
 
+            else if (input.toLowerCase().startsWith("todo ")) {
+
+                String description = input.substring(5);
+
+                tasks[count] = new Todo(description);
+                count++;
+
+                System.out.println("____________________________________________________________");
+                System.out.println(" Got it. I've added this task:");
+                System.out.println("   " + tasks[count - 1]);
+                System.out.println(" Now you have " + count + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+
+            }
+            else if (input.toLowerCase().startsWith("deadline ")) {
+
+                String rest = input.substring(9);
+
+                String[] parts = rest.split(" /by ", 2);
+
+                String description = parts[0];
+                String by = parts[1];
+
+                tasks[count] = new Deadline(description, by);
+                count++;
+
+                System.out.println("____________________________________________________________");
+                System.out.println(" Got it. I've added this task:");
+                System.out.println("   " + tasks[count - 1]);
+                System.out.println(" Now you have " + count + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+
+            }
+            else if (input.toLowerCase().startsWith("event ")) {
+
+                String rest = input.substring(6);
+
+                String[] part1 = rest.split(" /from ", 2);
+                String description = part1[0];
+
+                String[] part2 = part1[1].split(" /to ", 2);
+                String from = part2[0];
+                String to = part2[1];
+
+                tasks[count] = new Event(description, from, to);
+                count++;
+
+                System.out.println("____________________________________________________________");
+                System.out.println(" Got it. I've added this task:");
+                System.out.println("   " + tasks[count - 1]);
+                System.out.println(" Now you have " + count + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+
+            }
+
             else {
-                if (count < tasks.length) {
-                    tasks[count] = input;
-                    count++;
-                    System.out.println("____________________________________________________________");
-                    System.out.println(" added: " + input);
-                    System.out.println("____________________________________________________________");
-                } else {
                     System.out.println("____________________________________________________________");
                     System.out.println(" Task list full! Cannot add more.");
                     System.out.println("____________________________________________________________");
                 }
-        }
         }
     }
 }
