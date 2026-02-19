@@ -16,7 +16,8 @@ public class Chef {
         System.out.println("____________________________________________________________");
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage("data/duke.txt");
+        ArrayList<Task> tasks = storage.load();
 
         while (true) {
             String input = scanner.nextLine();
@@ -50,6 +51,7 @@ public class Chef {
                     }
 
                     tasks.get(index).markDone();
+                    storage.save(tasks);
                     System.out.println("____________________________________________________________");
                     System.out.println(" Nice! I've marked this task as done:");
                     System.out.println("   " + tasks.get(index));
@@ -63,6 +65,7 @@ public class Chef {
                     }
 
                     tasks.get(index).markUndone();
+                    storage.save(tasks);
                     System.out.println("____________________________________________________________");
                     System.out.println(" OK, I've marked this task as not done yet:");
                     System.out.println("   " + tasks.get(index));
@@ -82,6 +85,7 @@ public class Chef {
                     }
 
                     tasks.add(new Todo(description));
+                    storage.save(tasks);
 
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
@@ -105,6 +109,7 @@ public class Chef {
                     }
 
                     tasks.add(new Deadline(parts[0].trim(), parts[1].trim()));
+                    storage.save(tasks);
 
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
@@ -135,6 +140,7 @@ public class Chef {
                             part2[0].trim(),
                             part2[1].trim()
                     ));
+                    storage.save(tasks);
 
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
@@ -152,6 +158,7 @@ public class Chef {
                     }
 
                     Task removedTask = tasks.remove(index);
+                    storage.save(tasks);
 
                     System.out.println("____________________________________________________________");
                     System.out.println(" Noted. I've removed this task:");
