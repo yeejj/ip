@@ -1,5 +1,6 @@
 package chef;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Chef {
     public static void main(String[] args) {
@@ -15,8 +16,7 @@ public class Chef {
         System.out.println("____________________________________________________________");
         Scanner scanner = new Scanner(System.in);
 
-        Task[] tasks = new Task[100];
-        int count = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (true) {
             String input = scanner.nextLine();
@@ -33,11 +33,11 @@ public class Chef {
 
                 else if (input.equalsIgnoreCase("list")) {
                     System.out.println("____________________________________________________________");
-                    if (count == 0) {
+                    if (tasks.isEmpty()) {
                         System.out.println(" No tasks yet!");
                     } else {
-                        for (int i = 0; i < count; i++) {
-                            System.out.println(" " + (i + 1) + "." + tasks[i]);
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println(" " + (i + 1) + "." + tasks.get(i));
                         }
                     }
                     System.out.println("____________________________________________________________");
@@ -45,27 +45,27 @@ public class Chef {
 
                 else if (input.toLowerCase().startsWith("mark ")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    if (index < 0 || index >= count) {
+                    if (index < 0 || index >= tasks.size()) {
                         throw new ChefException("That task number doesn't exist.");
                     }
 
-                    tasks[index].markDone();
+                    tasks.get(index).markDone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" Nice! I've marked this task as done:");
-                    System.out.println("   " + tasks[index]);
+                    System.out.println("   " + tasks.get(index));
                     System.out.println("____________________________________________________________");
                 }
 
                 else if (input.toLowerCase().startsWith("unmark ")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    if (index < 0 || index >= count) {
+                    if (index < 0 || index >= tasks.size()) {
                         throw new ChefException("That task number doesn't exist.");
                     }
 
-                    tasks[index].markUndone();
+                    tasks.get(index).markUndone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" OK, I've marked this task as not done yet:");
-                    System.out.println("   " + tasks[index]);
+                    System.out.println("   " + tasks.get(index));
                     System.out.println("____________________________________________________________");
                 }
 
@@ -81,13 +81,12 @@ public class Chef {
                         throw new ChefException("A todo cannot have an empty description.");
                     }
 
-                    tasks[count] = new Todo(description);
-                    count++;
+                    tasks.add(new Todo(description));
 
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
-                    System.out.println("   " + tasks[count - 1]);
-                    System.out.println(" Now you have " + count + " tasks in the list.");
+                    System.out.println("   " +tasks.get(tasks.size() - 1));
+                    System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
                 }
 
@@ -105,13 +104,12 @@ public class Chef {
                         throw new ChefException("Deadline needs both description and date.");
                     }
 
-                    tasks[count] = new Deadline(parts[0].trim(), parts[1].trim());
-                    count++;
+                    tasks.add(new Deadline(parts[0].trim(), parts[1].trim()));
 
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
-                    System.out.println("   " + tasks[count - 1]);
-                    System.out.println(" Now you have " + count + " tasks in the list.");
+                    System.out.println("   " + tasks.get(tasks.size()  - 1));
+                    System.out.println(" Now you have " +  tasks.size()  + " tasks in the list.");
                     System.out.println("____________________________________________________________");
                 }
 
@@ -132,17 +130,33 @@ public class Chef {
                         throw new ChefException("Event must have description, start time and end time.");
                     }
 
-                    tasks[count] = new Event(
+                    tasks.add(new Event(
                             part1[0].trim(),
                             part2[0].trim(),
                             part2[1].trim()
-                    );
-                    count++;
+                    ));
 
                     System.out.println("____________________________________________________________");
                     System.out.println(" Got it. I've added this task:");
-                    System.out.println("   " + tasks[count - 1]);
-                    System.out.println(" Now you have " + count + " tasks in the list.");
+                    System.out.println("   " + tasks.get(tasks.size()- 1));
+                    System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                }
+
+                else if (input.toLowerCase().startsWith("delete ")) {
+
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+
+                    if (index < 0 || index >= tasks.size()) {
+                        throw new ChefException("That task number doesn't exist.");
+                    }
+
+                    Task removedTask = tasks.remove(index);
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Noted. I've removed this task:");
+                    System.out.println("   " + removedTask);
+                    System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
                 }
 
