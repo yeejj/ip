@@ -1,4 +1,5 @@
-# Chef User Guide
+# Chef User Guide 🍳
+
 ```
 ____________________________________________________________
 Hello from
@@ -11,12 +12,29 @@ Hello from
 What can I do for you?
 ____________________________________________________________
 ```
-
-Chef is a simple command-line chatbot that helps you manage your tasks, including todos, deadlines, and events. It automatically saves your tasks and allows you to mark them as done, delete, or search for tasks quickly.
+Chef is a simple command-line task management chatbot designed to help you keep track of your tasks efficiently.
+It tracks tasks including todos, deadlines, and events.
+It automatically saves your tasks and allows you to mark them as done, delete, or search for tasks quickly.
 
 ---
 
-## Adding Todos
+## 🚀 Quick Start
+
+1. Ensure you have Java 17 or later installed.
+2. Download the `.jar` file (if provided).
+3. Run the application:
+```
+java -jar chef.jar
+```
+4. Type commands into the terminal.
+5. Type `bye` to exit.
+
+---
+
+## 📋 Features
+
+---
+## 1️⃣ Adding Todos
 
 Adds a simple task without a date. 
 The input must begin with the word "todo".
@@ -33,7 +51,7 @@ Now you have 1 tasks in the list.
 ____________________________________________________________
 ```
 
-## Adding deadlines
+## 2️⃣ Adding deadlines
 
 Adds a task with a specific deadline date.
 The input must begin with the word "deadline".
@@ -53,7 +71,7 @@ ____________________________________________________________
 ```
 
 
-## Adding Events 
+## 3️⃣ Adding Events 
 
 Adds a task with a start and end time. 
 The input must begin with the word "event".
@@ -71,7 +89,7 @@ Now you have 3 tasks in the list.
 ____________________________________________________________
 ```
 
-## Adding Events
+## 4️⃣ Adding Events
 
 Adds a task with a start and end time.
 The input must begin with the word "event".
@@ -89,7 +107,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-## Marking a Task as Done
+## 5️⃣ Marking a Task as Done
 
 Marks a task as completed.
 The input must begin with the word "mark", followed by the number corresponding to the task.
@@ -105,7 +123,7 @@ Nice! I've marked this task as done:
 ____________________________________________________________
 ```
 
-## Unmarking a Task as Undone
+## 6️⃣ Unmarking a Task as Undone
 
 Marks a completed task as not done.
 The input must begin with the word "unmark", followed by the number corresponding to the task.
@@ -121,7 +139,7 @@ OK, I've marked this task as not done yet:
 ____________________________________________________________
 ```
 
-## Deleting a Task
+## 7️⃣ Deleting a Task
 
 Removes a task from the list.
 The input must begin with the word "delete", followed by the number corresponding to the task.
@@ -138,7 +156,7 @@ Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
 
-## Finding a Task
+## 8️⃣ Finding a Task
 
 Searches for tasks containing a keyword. Search is **case-insensitive**.
 The input must begin with the word "find".
@@ -154,7 +172,7 @@ Here are the matching tasks in your list:
 ____________________________________________________________
 ```
 
-## Finding a Task
+## 9️⃣ Finding a Task
 
 Closes the chatbot.
 

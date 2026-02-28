@@ -1,5 +1,1 @@
-T | 0 | hello
-T | 0 | spend time w my girlfriend
-D | 0 | test | 2026-03-05
 T | 0 | read book
-D | 0 | return book | 2026-03-05
