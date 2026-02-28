@@ -1,0 +1,47 @@
+package chef;
+
+import java.util.Scanner;
+
+public class Ui {
+
+    private static final String LINE = "____________________________________________________________";
+    private final Scanner scanner;
+
+    public Ui() {
+        scanner = new Scanner(System.in);
+    }
+
+    public void showWelcome() {
+        String logo =
+                " _____   _               ____   \n"
+                        + "|  ___| | |      ____   /  _ \\ \n"
+                        + "| |     | |___, / __ \\ |  /\\_/  \n"
+                        + "| |___  | ,_, | |  __/ | |---  \n"
+                        + "|_____| |_| |_| \\___| |__|       \n";
+
+        System.out.println(LINE);
+        System.out.println("Hello from\n" + logo);
+        System.out.println("What can I do for you?");
+        System.out.println(LINE);
+    }
+
+    public String readCommand() {
+        return scanner.nextLine();
+    }
+
+    public void showLine() {
+        System.out.println(LINE);
+    }
+
+    public void showExit() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void showError(String message) {
+        System.out.println("Error: " + message);
+    }
+
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
+}
