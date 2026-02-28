@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Storage {
@@ -65,12 +66,20 @@ public class Storage {
 
         if (task instanceof Todo) {
             return "T | " + status + " | " + task.description;
+
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return "D | " + status + " | " + d.description + " | " + d.by;
+            // LocalDate automatically saves in yyyy-MM-dd format
+            return "D | " + status + " | "
+                    + d.description + " | "
+                    + d.getBy();
+
         } else if (task instanceof Event) {
             Event e = (Event) task;
-            return "E | " + status + " | " + e.description + " | " + e.from + " | " + e.to;
+            return "E | " + status + " | "
+                    + e.description + " | "
+                    + e.from + " | "
+                    + e.to;
         }
 
         return "";
@@ -89,12 +98,16 @@ public class Storage {
                 case "T":
                     task = new Todo(parts[2]);
                     break;
+
                 case "D":
-                    task = new Deadline(parts[2], parts[3]);
+                    // Parse ISO format date back to LocalDate
+                    task = new Deadline(parts[2], LocalDate.parse(parts[3]));
                     break;
+
                 case "E":
                     task = new Event(parts[2], parts[3], parts[4]);
                     break;
+
                 default:
                     return null;
             }

@@ -9,7 +9,7 @@ public class Chef {
     public Chef(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());l
+        tasks = new TaskList(storage.load());
     }
 
     public void run() {

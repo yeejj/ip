@@ -1,24 +1,34 @@
 package chef;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class AddDeadlineCommand extends Command {
 
     private final String description;
-    private final String by;
+    private final String byString;
 
-    public AddDeadlineCommand(String description, String by) {
+    public AddDeadlineCommand(String description, String byString) {
         this.description = description;
-        this.by = by;
+        this.byString = byString;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChefException {
 
-        Task task = new Deadline(description, by);
-        tasks.add(task);
-        storage.save(tasks.getAll());
+        try {
+            LocalDate date = LocalDate.parse(byString);
 
-        ui.showMessage("Got it. I've added this task:");
-        ui.showMessage("  " + task);
-        ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
+            Task task = new Deadline(description, date);
+            tasks.add(task);
+            storage.save(tasks.getAll());
+
+            ui.showMessage("Got it. I've added this task:");
+            ui.showMessage("  " + task);
+            ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
+
+        } catch (DateTimeParseException e) {
+            throw new ChefException("Invalid date format! Use yyyy-MM-dd (e.g., 2019-12-02).");
+        }
     }
 }
