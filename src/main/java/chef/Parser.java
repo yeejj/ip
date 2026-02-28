@@ -76,6 +76,16 @@ public class Parser {
             );
         }
 
+        if (lower.startsWith("find ")) {
+            String keyword = input.substring(5).trim();
+
+            if (keyword.isEmpty()) {
+                throw new ChefException("Please provide a keyword to search.");
+            }
+
+            return new FindCommand(keyword);
+        }
+
         throw new ChefException("I don't recognize that command.");
     }
 }

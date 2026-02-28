@@ -43,4 +43,16 @@ public class TaskList {
     public ArrayList<Task> getAll() {
         return tasks;
     }
+
+    public java.util.ArrayList<Task> find(String keyword) {
+        java.util.ArrayList<Task> matches = new java.util.ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
+                matches.add(task);
+            }
+        }
+
+        return matches;
+    }
 }
