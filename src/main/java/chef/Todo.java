@@ -1,4 +1,8 @@
 package chef;
+
+/**
+ * Represents a simple task without date or time.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

@@ -2,6 +2,9 @@ package chef;
 
 import java.util.ArrayList;
 
+/**
+ * Command that finds tasks matching a keyword.
+ */
 public class FindCommand extends Command {
 
     private final String keyword;

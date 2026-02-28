@@ -2,11 +2,18 @@ package chef;
 
 import java.util.Scanner;
 
+/**
+ * Handles all user interactions including input and output.
+ * Responsible for displaying messages and reading commands.
+ */
 public class Ui {
 
     private static final String LINE = "____________________________________________________________";
     private final Scanner scanner;
 
+    /**
+     * Creates a Ui instance and initializes the input scanner.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
