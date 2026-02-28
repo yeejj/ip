@@ -33,7 +33,6 @@ java -jar chef.jar
 
 ## 📋 Features
 
----
 ## 1️⃣ Adding Todos
 
 Adds a simple task without a date. 
