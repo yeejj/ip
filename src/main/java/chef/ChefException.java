@@ -1,6 +1,8 @@
 package chef;
 /**
- * Custom exception used for handling Chef-related errors.
+ * Creates a ChefException with the specified message.
+ *
+ * @param message Error message.
  */
 public class ChefException extends Exception {
 
