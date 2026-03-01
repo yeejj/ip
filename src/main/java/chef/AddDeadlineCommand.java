@@ -2,7 +2,10 @@ package chef;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
+/**
+ * Executes the AddDeadline command.
+ *
+ */
 public class AddDeadlineCommand extends Command {
 
     private final String description;
