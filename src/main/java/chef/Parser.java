@@ -1,7 +1,17 @@
 package chef;
 
+/**
+ * Responsible for parsing user input into executable commands.
+ */
 public class Parser {
 
+    /**
+     * Parses a full user input string into a Command object.
+     *
+     * @param input Full command entered by the user.
+     * @return Corresponding Command object.
+     * @throws ChefException If the command is invalid.
+     */
     public static Command parse(String input) throws ChefException {
 
         String lower = input.toLowerCase();
@@ -74,6 +84,16 @@ public class Parser {
                     part2[0].trim(),
                     part2[1].trim()
             );
+        }
+
+        if (lower.startsWith("find ")) {
+            String keyword = input.substring(5).trim();
+
+            if (keyword.isEmpty()) {
+                throw new ChefException("Please provide a keyword to search.");
+            }
+
+            return new FindCommand(keyword);
         }
 
         throw new ChefException("I don't recognize that command.");
