@@ -48,6 +48,6 @@ public class Chef {
     }
 
     public static void main(String[] args) {
-        new Chef("data/duke.txt").run();
+        new Chef("data/chef.txt").run();
     }
 }
