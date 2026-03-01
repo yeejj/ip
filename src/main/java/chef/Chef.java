@@ -1,3 +1,9 @@
+/**
+ * Main entry point of the Chef chatbot application.
+ * It initializes the UI, Storage, and TaskList,
+ * and runs the main command loop.
+ */
+
 package chef;
 
 public class Chef {
@@ -6,12 +12,20 @@ public class Chef {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Chef instance using the given file path for storage.
+     *
+     * @param filePath Path to the data file.
+     */
     public Chef(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Runs the main chatbot loop until an exit command is issued.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -7,14 +7,27 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Handles loading tasks from file and saving tasks to file.
+ */
 public class Storage {
 
     private final String filePath;
 
+    /**
+     * Creates a Storage object with the specified file path.
+     *
+     * @param filePath Path to the data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the storage file.
+     *
+     * @return List of tasks loaded from file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         Path path = Paths.get(filePath);
@@ -45,6 +58,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given list of tasks to file.
+     *
+     * @param tasks List of tasks to save.
+     */
     public void save(ArrayList<Task> tasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
@@ -61,6 +79,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts a Task into its file storage format.
+     *
+     * @param task Task to encode.
+     * @return Encoded string representation.
+     */
     private String encodeTask(Task task) {
         String status = task.isDone ? "1" : "0";
 
@@ -85,8 +109,13 @@ public class Storage {
         return "";
     }
 
-    private Task parseTask(String line) {
-        try {
+    /**
+     * Parses a line from the storage file into a Task object.
+     *
+     * @param line A single line from the file.
+     * @return Parsed Task object, or null if corrupted.
+     */
+    private Task parseTask(String line) {        try {
             String[] parts = line.split(" \\| ");
 
             String type = parts[0];

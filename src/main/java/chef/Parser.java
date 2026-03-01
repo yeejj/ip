@@ -1,7 +1,17 @@
 package chef;
 
+/**
+ * Responsible for parsing user input into executable commands.
+ */
 public class Parser {
 
+    /**
+     * Parses a full user input string into a Command object.
+     *
+     * @param input Full command entered by the user.
+     * @return Corresponding Command object.
+     * @throws ChefException If the command is invalid.
+     */
     public static Command parse(String input) throws ChefException {
 
         String lower = input.toLowerCase();

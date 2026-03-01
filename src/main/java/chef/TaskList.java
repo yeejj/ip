@@ -2,8 +2,18 @@ package chef;
 
 import java.util.ArrayList;
 
+/**
+ * Manages a list of tasks and provides operations
+ * such as add, remove, retrieve, and search.
+ */
 public class TaskList {
 
+    /**
+     * Finds tasks containing the given keyword.
+     *
+     * @param keyword Keyword to search for.
+     * @return List of matching tasks.
+     */
     private final ArrayList<Task> tasks;
 
     public TaskList() {
